@@ -1,0 +1,61 @@
+---
+title: "Simulating CNVs in B73"
+author: "Simon Renny-Byfield"
+date: April 6th 2015
+output: html_document
+---
+
+##Introduction##
+
+This is a record of CNV simulations over the B73 reference genome. The idea is to simulate gene deletions, then simulate Illumina data from this simulation, map back to the genome and see how well we call those gene deletions.
+
+##Generating the simulated Illumina data##
+
+Firstly, choose 1000 random genes as candidates for deletion:
+
+```
+grep -v "scaffold\|Pt\|Mt" < /Users/simonrenny-byfield/maize_genome/Zea_mays.AGPv3.22.gene_only.gff | gsort --random-sort | head -n 1000 >1000.genes.gff
+```
+
+Next step is to generate two genomes, each with a random 500 of these genes deleted.
+
+for the forst sample:
+```
+bedtools maskfasta -fi /Users/simonrenny-byfield/maize_genome/Zea_mays.AGPv3.22.dna.genome.fa -fo sim1_K.fa -mc K -bed <(cat 1000.genes.gff | gsort --random-sort | head -n 500 | tee sim1.removed.genes.gff) 
+```
+
+and:
+
+```
+bedtools maskfasta -fi /Users/simonrenny-byfield/maize_genome/Zea_mays.AGPv3.22.dna.genome.fa -fo sim2_K.fa -mc K -bed <(cat 1000.genes.gff | gsort --random-sort | head -n 500 | tee sim2.removed.genes.gff) 
+```
+
+for the second sample. 
+
+The outout needs to be cleaned up, the intervals are replaced with `K` and so we can use `sed` to filter these out using:
+
+```
+sed 's/K//g' < sim1_K.fa > sim1.fa
+```
+Next, we can see what genes are homozygous, and what are heterozygous for deletions amoung these two simulations. This can be done using `grep`. For example find the homozygous present using:
+
+```
+grep -F -v -f sim1.removed.genes.gff 1000.genes.gff | grep -F -v -f sim2.removed.genes.gff > sim.homo.present.gff
+```
+
+Now what about homozygous deletion:
+
+```
+grep -F -x -f sim1.removed.genes.gff sim2.removed.genes.gff > sim.homo.absent.gff
+```
+
+Now, of course, the heterozygotes:
+
+```
+grep -F -v -f sim1.removed.genes.gff sim2.removed.genes.gff > sim.hetero.gff
+grep -F -v -f sim2.removed.genes.gff sim1.removed.genes.gff >> sim.hetero.gff
+```
+
+
+
+Following this we need use [wgsim](https://github.com/lh3/wgsim) to use these two (combined) to generate a Illumina sequencing run.

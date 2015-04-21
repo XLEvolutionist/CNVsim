@@ -1,0 +1,249 @@
+5	ensembl	gene	189440602	189453263	.	+	.	ID=gene:GRMZM2G315121;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FH99];logic_name=genebuilder
+2	ensembl	gene	231250948	231251549	.	+	.	ID=gene:GRMZM2G513206;biotype=protein_coding;logic_name=genebuilder
+4	ensembl	gene	219619213	219633574	.	-	.	ID=gene:GRMZM2G702811;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7U602];logic_name=genebuilder
+2	ensembl	gene	225571322	225574644	.	+	.	ID=gene:GRMZM2G408768;biotype=protein_coding;description=14-3-3-like protein  [Source:UniProtKB/Swiss-Prot%3BAcc:P29306];logic_name=genebuilder
+3	ensembl	gene	209108962	209111500	.	-	.	ID=gene:GRMZM2G164674;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C4IY58];logic_name=genebuilder
+5	ensembl	gene	184145307	184145672	.	+	.	ID=gene:AC231633.1_FG004;biotype=protein_coding;logic_name=fgenesh
+8	ensembl	gene	158937913	158938377	.	-	.	ID=gene:AC198923.4_FG002;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7V5S6];logic_name=fgenesh
+8	ensembl	gene	10756078	10762016	.	-	.	ID=gene:GRMZM2G119345;biotype=protein_coding;description=ABC-2 type transporter family protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UPX8];logic_name=genebuilder
+3	ensembl	gene	153336686	153337403	.	+	.	ID=gene:GRMZM2G076621;biotype=protein_coding;description=Putative uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6TRR7];logic_name=genebuilder
+7	ensembl	gene	167380587	167383516	.	-	.	ID=gene:GRMZM2G459820;biotype=protein_coding;logic_name=genebuilder
+10	ensembl	gene	69526223	69527381	.	+	.	ID=gene:GRMZM2G066539;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7TZZ6];logic_name=genebuilder
+1	ensembl	gene	240438318	240442714	.	+	.	ID=gene:GRMZM2G017237;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0HH84];logic_name=genebuilder
+6	ensembl	gene	165214021	165220621	.	+	.	ID=gene:GRMZM2G065757;biotype=protein_coding;description=Aspartic proteinase oryzasin-1 isoform 1%3B Aspartic proteinase oryzasin-1 isoform 2%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0P3K6];logic_name=genebuilder
+1	ensembl	gene	107294500	107295807	.	+	.	ID=gene:GRMZM2G380777;biotype=protein_coding;logic_name=genebuilder
+8	ensembl	gene	151668926	151683349	.	-	.	ID=gene:GRMZM2G092018;biotype=protein_coding;description=Cytidyltransferase isoform 1%3B Cytidyltransferase isoform 2  [Source:UniProtKB/TrEMBL%3BAcc:K7V8C7];logic_name=genebuilder
+9	ensembl	gene	139009383	139013331	.	-	.	ID=gene:GRMZM2G162467;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0PED2];logic_name=genebuilder
+8	ensembl	gene	66344845	66373626	.	+	.	ID=gene:GRMZM2G108851;biotype=protein_coding;description=Dopamine beta-monooxygenase%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6TH76];logic_name=genebuilder
+10	ensembl	gene	122552474	122554262	.	+	.	ID=gene:GRMZM2G162845;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7TPS2];logic_name=genebuilder
+8	ensembl	gene	35566541	35567721	.	+	.	ID=gene:GRMZM2G053503;biotype=protein_coding;description=Ethylene-responsive factor-like protein 1%3B Putative AP2/EREBP transcription factor superfamily protein  [Source:UniProtKB/TrEMBL%3BAcc:B6TYN8];logic_name=genebuilder
+6	ensembl	gene	3435340	3437144	.	+	.	ID=gene:GRMZM2G034958;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UTP9];logic_name=genebuilder
+6	ensembl	gene	168066282	168071695	.	-	.	ID=gene:GRMZM2G175610;biotype=protein_coding;logic_name=genebuilder
+1	ensembl	gene	18831423	18831698	.	+	.	ID=gene:GRMZM2G117556;biotype=protein_coding;logic_name=genebuilder
+7	ensembl	gene	164695137	164706198	.	+	.	ID=gene:GRMZM2G082205;biotype=protein_coding;logic_name=genebuilder
+1	ensembl	gene	22643455	22646836	.	-	.	ID=gene:GRMZM2G055172;biotype=protein_coding;description=Putative uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6TJ48];logic_name=genebuilder
+4	ensembl	gene	38835017	38836622	.	+	.	ID=gene:GRMZM2G702411;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7TXI9];logic_name=genebuilder
+2	ensembl	gene	46620466	46632064	.	-	.	ID=gene:GRMZM2G028139;biotype=protein_coding;description=Putative translation initiation factor IF-2  [Source:UniProtKB/TrEMBL%3BAcc:Q4W1F3];logic_name=genebuilder
+7	ensembl	gene	4120822	4123467	.	+	.	ID=gene:GRMZM5G831780;biotype=protein_coding;description=Mitochondrial 60S ribosomal protein L5%3B Mitochondrial ribosomal protein L5%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:Q84L29];logic_name=genebuilder
+1	ensembl	gene	271094196	271099292	.	-	.	ID=gene:GRMZM2G088162;biotype=protein_coding;description=Putative uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6T9K7];logic_name=genebuilder
+6	ensembl	gene	164521729	164522010	.	+	.	ID=gene:AC210731.3_FG002;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UMR4];logic_name=fgenesh
+3	ensembl	gene	19255236	19258408	.	-	.	ID=gene:GRMZM2G044552;biotype=protein_coding;description=PRPK  [Source:UniProtKB/TrEMBL%3BAcc:B6TUM9];logic_name=genebuilder
+5	ensembl	gene	204137280	204142569	.	+	.	ID=gene:GRMZM2G029029;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FU04];logic_name=genebuilder
+1	ensembl	gene	156502164	156504722	.	-	.	ID=gene:GRMZM2G093736;biotype=protein_coding;description=Lectin-like receptor kinase 7  [Source:UniProtKB/TrEMBL%3BAcc:B6SWH3];logic_name=genebuilder
+8	ensembl	gene	162135726	162136778	.	+	.	ID=gene:GRMZM2G030688;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7V669];logic_name=genebuilder
+9	ensembl	gene	24467704	24470325	.	-	.	ID=gene:GRMZM2G050333;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7V7J9];logic_name=genebuilder
+4	ensembl	gene	44088617	44091066	.	-	.	ID=gene:GRMZM2G702426;biotype=protein_coding;description=60S ribosomal protein L17  [Source:UniProtKB/Swiss-Prot%3BAcc:O48557];external_name=RPL17;logic_name=genebuilder
+6	ensembl	gene	27897698	27902109	.	+	.	ID=gene:GRMZM5G837841;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UE88];logic_name=genebuilder
+4	ensembl	gene	201540262	201543535	.	-	.	ID=gene:GRMZM2G062772;biotype=protein_coding;description=Calcium and calcium/calmodulin-dependent serine/threonine-proteinkinase%3B Putative calcium-dependent protein kinase family protein%3B Putative calcium/calmodulin dependent protein kinase%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:Q208N4];logic_name=genebuilder
+9	ensembl	gene	139449305	139450253	.	+	.	ID=gene:GRMZM5G825759;biotype=protein_coding;description=ATP synthase B chain  [Source:UniProtKB/TrEMBL%3BAcc:K7VN08];logic_name=genebuilder
+7	ensembl	gene	10798507	10801399	.	+	.	ID=gene:GRMZM2G015534;biotype=protein_coding;description=Regulatory protein opaque-2  [Source:UniProtKB/Swiss-Prot%3BAcc:P12959];logic_name=genebuilder
+4	ensembl	gene	36447227	36452013	.	+	.	ID=gene:GRMZM2G131595;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0HGP8];logic_name=genebuilder
+5	ensembl	gene	70002485	70006187	.	+	.	ID=gene:GRMZM2G169699;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FL80];logic_name=genebuilder
+3	ensembl	gene	203572898	203579777	.	+	.	ID=gene:AC195154.3_FG004;biotype=protein_coding;logic_name=fgenesh
+5	ensembl	gene	191715737	191736428	.	+	.	ID=gene:GRMZM2G170591;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C4J4C0];logic_name=genebuilder
+5	ensembl	gene	6378789	6380581	.	+	.	ID=gene:GRMZM2G141819;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FXQ0];logic_name=genebuilder
+2	ensembl	gene	120865364	120867494	.	+	.	ID=gene:GRMZM2G108597;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FGJ5];logic_name=genebuilder
+5	ensembl	gene	95038449	95041197	.	-	.	ID=gene:GRMZM2G109805;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0HGN9];logic_name=genebuilder
+6	ensembl	gene	128385137	128390865	.	-	.	ID=gene:GRMZM2G092258;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0HFQ3];logic_name=genebuilder
+2	ensembl	gene	99277797	99288223	.	+	.	ID=gene:GRMZM2G000114;biotype=protein_coding;description=Protein binding protein%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6SKC6];logic_name=genebuilder
+10	ensembl	gene	95448560	95451686	.	-	.	ID=gene:GRMZM2G174736;biotype=protein_coding;description=Basic salivary proline-rich protein 2 isoform 1%3B Basic salivary proline-rich protein 2 isoform 2%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FTS3];logic_name=genebuilder
+3	ensembl	gene	136098162	136099235	.	-	.	ID=gene:GRMZM2G092142;biotype=protein_coding;logic_name=genebuilder
+4	ensembl	gene	240272453	240276583	.	+	.	ID=gene:GRMZM2G025127;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UCE9];logic_name=genebuilder
+1	ensembl	gene	161698212	161698820	.	+	.	ID=gene:GRMZM2G426125;biotype=protein_coding;description=Zinc finger protein 7  [Source:UniProtKB/TrEMBL%3BAcc:B6TUW1];logic_name=genebuilder
+1	ensembl	gene	21720037	21721470	.	+	.	ID=gene:GRMZM2G114184;biotype=protein_coding;description=HLS1  [Source:UniProtKB/TrEMBL%3BAcc:B6SUM6];logic_name=genebuilder
+10	ensembl	gene	18515547	18516859	.	-	.	ID=gene:GRMZM2G081140;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7TY08];logic_name=genebuilder
+4	ensembl	gene	164802874	164803472	.	-	.	ID=gene:GRMZM2G392951;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UJ11];logic_name=genebuilder
+3	ensembl	gene	153809030	153810520	.	+	.	ID=gene:GRMZM2G132509;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FZF3];logic_name=genebuilder
+6	ensembl	gene	96832439	96836451	.	+	.	ID=gene:GRMZM2G442804;biotype=protein_coding;description=S-adenosylmethionine-dependent methyltransferase%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FF45];logic_name=genebuilder
+8	ensembl	gene	164107807	164113168	.	+	.	ID=gene:GRMZM2G117405;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6TTE2];logic_name=genebuilder
+3	ensembl	gene	34681198	34681584	.	-	.	ID=gene:EF517601.1_FG016;biotype=protein_coding;description=MFS18 protein  [Source:UniProtKB/Swiss-Prot%3BAcc:P32439];external_name=MFS18;logic_name=fgenesh
+6	ensembl	gene	31420602	31423013	.	+	.	ID=gene:GRMZM2G099619;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UB28];logic_name=genebuilder
+4	ensembl	gene	43979204	43981299	.	-	.	ID=gene:GRMZM2G316447;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7TUD1];logic_name=genebuilder
+8	ensembl	gene	169887391	169888449	.	-	.	ID=gene:GRMZM2G468056;biotype=protein_coding;description=Putative WRKY DNA-binding domain superfamily protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VNW9];logic_name=genebuilder
+2	ensembl	gene	3978727	3979860	.	-	.	ID=gene:GRMZM2G056513;biotype=protein_coding;description=Putative uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6T0H1];logic_name=genebuilder
+1	ensembl	gene	167533022	167538156	.	+	.	ID=gene:GRMZM2G012156;biotype=protein_coding;logic_name=genebuilder
+3	ensembl	gene	19258469	19263956	.	+	.	ID=gene:GRMZM2G044697;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FDN3];logic_name=genebuilder
+1	ensembl	gene	138622310	138623188	.	+	.	ID=gene:GRMZM2G379375;biotype=protein_coding;logic_name=genebuilder
+7	ensembl	gene	170463298	170477999	.	+	.	ID=gene:GRMZM2G111713;biotype=protein_coding;description=Tim44-like domain containing protein%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4G030];logic_name=genebuilder
+4	ensembl	gene	163422412	163428013	.	-	.	ID=gene:GRMZM2G077258;biotype=protein_coding;description=Ribulose-1%2C5-bisphosphate carboxylase/oxygenase small subunit N-methyltransferase I%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FNM7];logic_name=genebuilder
+4	ensembl	gene	149088915	149090206	.	+	.	ID=gene:GRMZM2G432060;biotype=protein_coding;description=SAUR11-auxin-responsive SAUR family member  [Source:UniProtKB/TrEMBL%3BAcc:K7U6V1];logic_name=genebuilder
+8	ensembl	gene	101285814	101286751	.	-	.	ID=gene:GRMZM2G431156;biotype=protein_coding;description=Putative MYB DNA-binding domain superfamily protein%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0PM92];logic_name=genebuilder
+8	ensembl	gene	119587820	119590668	.	-	.	ID=gene:GRMZM2G034647;biotype=protein_coding;description=Cyclin1  [Source:UniProtKB/TrEMBL%3BAcc:K7V0X7];logic_name=genebuilder
+2	ensembl	gene	147469465	147470181	.	-	.	ID=gene:GRMZM2G470535;biotype=protein_coding;logic_name=genebuilder
+9	ensembl	gene	59150895	59153748	.	-	.	ID=gene:GRMZM2G376416;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7V996];logic_name=genebuilder
+6	ensembl	gene	98516334	98519688	.	-	.	ID=gene:GRMZM2G026802;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FDX3];logic_name=genebuilder
+1	ensembl	gene	76847781	76850509	.	+	.	ID=gene:GRMZM2G084063;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6SIA6];logic_name=genebuilder
+7	ensembl	gene	149205722	149210560	.	+	.	ID=gene:GRMZM2G455085;biotype=protein_coding;logic_name=genebuilder
+9	ensembl	gene	112717727	112718641	.	+	.	ID=gene:AC226736.2_FG002;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VXS3];logic_name=fgenesh
+9	ensembl	gene	152941252	152946177	.	+	.	ID=gene:GRMZM2G063387;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0PCD8];logic_name=genebuilder
+10	ensembl	gene	24452184	24457178	.	-	.	ID=gene:GRMZM2G141848;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7TFP9];logic_name=genebuilder
+2	ensembl	gene	202964730	202965761	.	+	.	ID=gene:GRMZM2G179476;biotype=protein_coding;logic_name=genebuilder
+6	ensembl	gene	162090309	162097425	.	-	.	ID=gene:GRMZM2G093441;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0P8A1];logic_name=genebuilder
+4	ensembl	gene	124393618	124394423	.	-	.	ID=gene:GRMZM2G702564;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7U5F8];logic_name=genebuilder
+9	ensembl	gene	51808500	51809196	.	+	.	ID=gene:GRMZM5G826778;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7V914];logic_name=genebuilder
+1	ensembl	gene	272340323	272342968	.	-	.	ID=gene:GRMZM2G137891;biotype=protein_coding;description=Putative uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6SR80];logic_name=genebuilder
+5	ensembl	gene	159983509	159985850	.	+	.	ID=gene:GRMZM2G328961;biotype=protein_coding;logic_name=genebuilder
+7	ensembl	gene	125556056	125559895	.	-	.	ID=gene:GRMZM2G136734;biotype=protein_coding;logic_name=genebuilder
+8	ensembl	gene	156004173	156008541	.	+	.	ID=gene:GRMZM2G438673;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7V568];logic_name=genebuilder
+8	ensembl	gene	38813397	38814627	.	-	.	ID=gene:GRMZM2G124553;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7US31];logic_name=genebuilder
+10	ensembl	gene	71470294	71470827	.	-	.	ID=gene:GRMZM2G087525;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UEZ9];logic_name=genebuilder
+2	ensembl	gene	197382348	197387789	.	+	.	ID=gene:GRMZM2G078114;biotype=protein_coding;logic_name=genebuilder
+4	ensembl	gene	210865185	210868144	.	-	.	ID=gene:GRMZM2G002652;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UPC7];logic_name=genebuilder
+10	ensembl	gene	143089757	143102281	.	-	.	ID=gene:GRMZM2G180471;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FP36];logic_name=genebuilder
+4	ensembl	gene	210504550	210507934	.	-	.	ID=gene:GRMZM2G040613;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FJ58];logic_name=genebuilder
+7	ensembl	gene	164239820	164242430	.	-	.	ID=gene:GRMZM2G167497;biotype=protein_coding;description=Brittle stalk-2-like protein 7%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:A1DZD8];logic_name=genebuilder
+9	ensembl	gene	153463874	153464378	.	-	.	ID=gene:GRMZM2G330384;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VLY8];logic_name=genebuilder
+5	ensembl	gene	203873600	203879453	.	-	.	ID=gene:GRMZM2G109039;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0PCY9];logic_name=genebuilder
+2	ensembl	gene	220998037	220998512	.	+	.	ID=gene:AC206749.3_FG003;biotype=protein_coding;logic_name=fgenesh
+5	ensembl	gene	185272042	185275772	.	+	.	ID=gene:GRMZM2G463711;biotype=protein_coding;logic_name=genebuilder
+3	ensembl	gene	86555040	86555440	.	+	.	ID=gene:GRMZM5G815477;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0PMN0];logic_name=genebuilder
+1	ensembl	gene	74413851	74416583	.	-	.	ID=gene:GRMZM5G867768;biotype=protein_coding;logic_name=genebuilder
+2	ensembl	gene	169781374	169782867	.	-	.	ID=gene:GRMZM2G137550;biotype=protein_coding;logic_name=genebuilder
+6	ensembl	gene	128905006	128908832	.	+	.	ID=gene:GRMZM2G438378;biotype=protein_coding;description=Phospholipase D  [Source:UniProtKB/TrEMBL%3BAcc:K7V2C6];logic_name=genebuilder
+1	ensembl	gene	287585483	287587675	.	-	.	ID=gene:GRMZM2G046430;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FY89];logic_name=genebuilder
+2	ensembl	gene	54833433	54835123	.	-	.	ID=gene:GRMZM2G362803;biotype=protein_coding;logic_name=genebuilder
+4	ensembl	gene	74664865	74666967	.	-	.	ID=gene:GRMZM2G419409;biotype=protein_coding;description=Putative YDG/SRA domain containing protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UED0];logic_name=genebuilder
+4	ensembl	gene	173783497	173784817	.	-	.	ID=gene:GRMZM2G411746;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UKC4];logic_name=genebuilder
+4	ensembl	gene	71492160	71493042	.	+	.	ID=gene:GRMZM2G534888;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7U3J7];logic_name=genebuilder
+5	ensembl	gene	19207810	19212507	.	-	.	ID=gene:GRMZM2G081221;biotype=protein_coding;logic_name=genebuilder
+6	ensembl	gene	135500972	135507945	.	+	.	ID=gene:GRMZM2G137704;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7URP1];logic_name=genebuilder
+2	ensembl	gene	209273952	209276604	.	+	.	ID=gene:GRMZM2G082612;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0P2L9];logic_name=genebuilder
+9	ensembl	gene	123497640	123499951	.	+	.	ID=gene:GRMZM2G109326;biotype=protein_coding;description=Brittle stalk-2%3B Brittle stalk-2COBRA-like protein 4%3B COBRA-like protein 4%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:A0EJ90];logic_name=genebuilder
+10	ensembl	gene	3283523	3287419	.	-	.	ID=gene:AC152495.1_FG002;biotype=protein_coding;description=Resistance to Puccinia sorghi1  [Source:UniProtKB/TrEMBL%3BAcc:K7TIB8];logic_name=fgenesh
+8	ensembl	gene	143230970	143239777	.	-	.	ID=gene:GRMZM2G039889;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FJE4];logic_name=genebuilder
+3	ensembl	gene	174933621	174936978	.	-	.	ID=gene:GRMZM2G016240;biotype=protein_coding;logic_name=genebuilder
+8	ensembl	gene	83452688	83453749	.	-	.	ID=gene:GRMZM5G812554;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UUA8];logic_name=genebuilder
+10	ensembl	gene	65629025	65632875	.	-	.	ID=gene:GRMZM2G038967;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7TH33];logic_name=genebuilder
+1	ensembl	gene	185502621	185506038	.	+	.	ID=gene:GRMZM2G134205;biotype=protein_coding;logic_name=genebuilder
+4	ensembl	gene	179655519	179658130	.	+	.	ID=gene:GRMZM2G075117;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7U9X4];logic_name=genebuilder
+1	ensembl	gene	89987873	89988424	.	-	.	ID=gene:AC212809.2_FG002;biotype=protein_coding;logic_name=genebuilder
+4	ensembl	gene	106696523	106697982	.	+	.	ID=gene:GRMZM2G156079;biotype=protein_coding;description=ZCN2  [Source:UniProtKB/TrEMBL%3BAcc:A8WER4];logic_name=genebuilder
+1	ensembl	gene	7546184	7547374	.	-	.	ID=gene:GRMZM2G003538;biotype=protein_coding;logic_name=genebuilder
+3	ensembl	gene	31051453	31051780	.	+	.	ID=gene:GRMZM2G701405;biotype=protein_coding;logic_name=genebuilder
+10	ensembl	gene	133750205	133750699	.	+	.	ID=gene:GRMZM2G396527;biotype=protein_coding;description=Putative homeobox DNA-binding and leucine zipper domain family protein  [Source:UniProtKB/TrEMBL%3BAcc:K7TR63];logic_name=genebuilder
+6	ensembl	gene	114755227	114762434	.	+	.	ID=gene:GRMZM2G082613;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UK26];logic_name=genebuilder
+3	ensembl	gene	223083222	223085568	.	-	.	ID=gene:GRMZM2G074599;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B7ZYX0];logic_name=genebuilder
+5	ensembl	gene	66955298	66957905	.	+	.	ID=gene:GRMZM2G137403;biotype=protein_coding;logic_name=genebuilder
+1	ensembl	gene	223088913	223099932	.	-	.	ID=gene:GRMZM2G073399;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FBG9];logic_name=genebuilder
+6	ensembl	gene	157175806	157181190	.	-	.	ID=gene:GRMZM2G174730;biotype=protein_coding;description=SC3 protein%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6T3X4];logic_name=genebuilder
+2	ensembl	gene	72416123	72420409	.	-	.	ID=gene:GRMZM2G000980;biotype=protein_coding;logic_name=genebuilder
+9	ensembl	gene	143307350	143310093	.	+	.	ID=gene:GRMZM2G149798;biotype=protein_coding;description=Putative thaumatin domain family protein  [Source:UniProtKB/TrEMBL%3BAcc:K7WFC1];logic_name=genebuilder
+10	ensembl	gene	147337601	147342637	.	+	.	ID=gene:GRMZM2G092607;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FX22];logic_name=genebuilder
+6	ensembl	gene	106637763	106640842	.	+	.	ID=gene:GRMZM2G129783;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VF90];logic_name=genebuilder
+8	ensembl	gene	26756399	26759559	.	+	.	ID=gene:GRMZM2G464891;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VBE7];logic_name=genebuilder
+5	ensembl	gene	212142036	212152040	.	-	.	ID=gene:GRMZM2G039683;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B8A2Q0];logic_name=genebuilder
+5	ensembl	gene	148097889	148098503	.	-	.	ID=gene:GRMZM5G899985;biotype=protein_coding;logic_name=genebuilder
+5	ensembl	gene	169917031	169920010	.	+	.	ID=gene:AC233850.1_FG009;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FW75];logic_name=fgenesh
+5	ensembl	gene	214126399	214126887	.	-	.	ID=gene:GRMZM2G467756;biotype=protein_coding;description=Protein binding protein  [Source:UniProtKB/TrEMBL%3BAcc:B6SQ45];logic_name=genebuilder
+5	ensembl	gene	18407764	18412561	.	-	.	ID=gene:GRMZM2G059549;biotype=protein_coding;logic_name=genebuilder
+8	ensembl	gene	120103344	120105769	.	+	.	ID=gene:AC187099.5_FG005;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7V4Q3];logic_name=fgenesh
+8	ensembl	gene	142651683	142652309	.	-	.	ID=gene:GRMZM2G075386;biotype=protein_coding;description=Acanthoscurrin-2  [Source:UniProtKB/TrEMBL%3BAcc:K7V773];logic_name=genebuilder
+4	ensembl	gene	181662810	181663865	.	+	.	ID=gene:GRMZM2G040548;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6SQD7];logic_name=genebuilder
+3	ensembl	gene	225419072	225419888	.	-	.	ID=gene:GRMZM2G094418;biotype=protein_coding;logic_name=genebuilder
+2	ensembl	gene	171703507	171711295	.	+	.	ID=gene:GRMZM2G176977;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FM52];logic_name=genebuilder
+9	ensembl	gene	28406066	28413513	.	+	.	ID=gene:GRMZM2G153792;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7V7Z3];logic_name=genebuilder
+8	ensembl	gene	152424788	152430790	.	+	.	ID=gene:GRMZM2G126691;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0PFY8];logic_name=genebuilder
+1	ensembl	gene	214284589	214291336	.	+	.	ID=gene:GRMZM2G459391;biotype=protein_coding;description=ATP-dependent Clp protease adaptor protein ClpS containing protein%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FRY9];logic_name=genebuilder
+1	ensembl	gene	644608	652093	.	-	.	ID=gene:GRMZM2G032104;biotype=protein_coding;description=Putative uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6UAP2];logic_name=genebuilder
+3	ensembl	gene	169114540	169123896	.	-	.	ID=gene:GRMZM2G026855;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FJH6];logic_name=genebuilder
+9	ensembl	gene	44484941	44485832	.	+	.	ID=gene:GRMZM2G704151;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VGG9];logic_name=genebuilder
+1	ensembl	gene	196839526	196840758	.	-	.	ID=gene:GRMZM2G472671;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FU91];logic_name=genebuilder
+8	ensembl	gene	6023286	6028417	.	-	.	ID=gene:GRMZM2G049416;biotype=protein_coding;description=50S ribosomal protein L3-2  [Source:UniProtKB/TrEMBL%3BAcc:K7VP39];logic_name=genebuilder
+2	ensembl	gene	95792679	95798055	.	+	.	ID=gene:GRMZM2G567619;biotype=protein_coding;logic_name=genebuilder
+10	ensembl	gene	11319479	11321410	.	-	.	ID=gene:GRMZM2G157168;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FNY1];logic_name=genebuilder
+1	ensembl	gene	280645578	280646317	.	-	.	ID=gene:GRMZM2G009944;biotype=protein_coding;logic_name=genebuilder
+9	ensembl	gene	28517992	28523621	.	-	.	ID=gene:GRMZM2G052389;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7V7Z8];logic_name=genebuilder
+10	ensembl	gene	14731796	14734545	.	+	.	ID=gene:GRMZM2G048175;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UCP0];logic_name=genebuilder
+2	ensembl	gene	182328753	182332957	.	+	.	ID=gene:GRMZM2G336456;biotype=protein_coding;logic_name=genebuilder
+9	ensembl	gene	22435015	22448323	.	-	.	ID=gene:GRMZM2G398341;biotype=protein_coding;description=Putative DUF1692 domain containing protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VF41];logic_name=genebuilder
+4	ensembl	gene	156811358	156811657	.	-	.	ID=gene:GRMZM5G873094;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7TZF6];logic_name=genebuilder
+1	ensembl	gene	179209612	179213208	.	-	.	ID=gene:GRMZM2G026976;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FS73];logic_name=genebuilder
+4	ensembl	gene	94971317	94971860	.	-	.	ID=gene:GRMZM2G355221;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7TWP2];logic_name=genebuilder
+10	ensembl	gene	1084003	1085634	.	+	.	ID=gene:GRMZM2G066142;biotype=protein_coding;description=Agmatine coumaroyltransferase%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FU54];logic_name=genebuilder
+8	ensembl	gene	32059577	32062287	.	-	.	ID=gene:GRMZM2G409062;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VRP2];logic_name=genebuilder
+2	ensembl	gene	139818315	139820635	.	-	.	ID=gene:GRMZM2G047292;biotype=protein_coding;description=Stachyose synthase  [Source:UniProtKB/TrEMBL%3BAcc:B6UBW7];logic_name=genebuilder
+7	ensembl	gene	121609553	121612456	.	+	.	ID=gene:GRMZM2G429842;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FAI3];logic_name=genebuilder
+10	ensembl	gene	146184325	146238075	.	-	.	ID=gene:GRMZM2G008611;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7U7N8];logic_name=genebuilder
+1	ensembl	gene	38724461	38725514	.	+	.	ID=gene:GRMZM2G046382;biotype=protein_coding;logic_name=genebuilder
+6	ensembl	gene	151321655	151324141	.	-	.	ID=gene:GRMZM2G061777;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UP22];logic_name=genebuilder
+10	ensembl	gene	10731115	10736548	.	+	.	ID=gene:GRMZM2G014397;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FG49];logic_name=genebuilder
+6	ensembl	gene	38116490	38117563	.	-	.	ID=gene:GRMZM2G055717;biotype=protein_coding;description=Putative amino acid selective channel family protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UBK5];logic_name=genebuilder
+6	ensembl	gene	94493809	94495506	.	-	.	ID=gene:GRMZM5G844329;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0PMJ7];logic_name=genebuilder
+2	ensembl	gene	231583751	231586999	.	+	.	ID=gene:GRMZM2G070444;biotype=protein_coding;logic_name=genebuilder
+7	ensembl	gene	12626477	12627199	.	+	.	ID=gene:GRMZM2G181051;biotype=protein_coding;logic_name=genebuilder
+1	ensembl	gene	177656492	177656989	.	-	.	ID=gene:GRMZM2G703826;biotype=protein_coding;logic_name=genebuilder
+2	ensembl	gene	186416709	186419287	.	+	.	ID=gene:GRMZM2G501652;biotype=protein_coding;description=Putative uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6T735];logic_name=genebuilder
+7	ensembl	gene	143445419	143450426	.	-	.	ID=gene:GRMZM2G147422;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B7ZX74];logic_name=genebuilder
+7	ensembl	gene	125417994	125419365	.	-	.	ID=gene:GRMZM2G462883;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0P503];logic_name=genebuilder
+4	ensembl	gene	159772529	159780661	.	-	.	ID=gene:GRMZM2G410150;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7TZP9];logic_name=genebuilder
+5	ensembl	gene	178651351	178654159	.	+	.	ID=gene:GRMZM2G088736;biotype=protein_coding;logic_name=genebuilder
+9	ensembl	gene	137400768	137401839	.	-	.	ID=gene:GRMZM2G083186;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VJ38];logic_name=genebuilder
+2	ensembl	gene	40643011	40658886	.	+	.	ID=gene:GRMZM2G022797;biotype=protein_coding;logic_name=genebuilder
+4	ensembl	gene	128289717	128292060	.	+	.	ID=gene:GRMZM2G008748;biotype=protein_coding;description=60S ribosomal protein L6  [Source:UniProtKB/TrEMBL%3BAcc:B4F9G6];logic_name=genebuilder
+1	ensembl	gene	276766707	276769810	.	-	.	ID=gene:GRMZM5G815323;biotype=protein_coding;description=Putative uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6TMX4];logic_name=genebuilder
+4	ensembl	gene	179852643	179853912	.	-	.	ID=gene:GRMZM2G007729;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FQS7];logic_name=genebuilder
+3	ensembl	gene	219772224	219780093	.	+	.	ID=gene:GRMZM2G463032;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0P4W8];logic_name=genebuilder
+1	ensembl	gene	69382714	69383298	.	-	.	ID=gene:GRMZM2G703624;biotype=protein_coding;logic_name=genebuilder
+2	ensembl	gene	52437508	52442955	.	-	.	ID=gene:GRMZM2G147685;biotype=protein_coding;logic_name=genebuilder
+2	ensembl	gene	109744665	109746224	.	-	.	ID=gene:GRMZM2G167613;biotype=protein_coding;description=Mannitol dehydrogenase%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FJW4];logic_name=genebuilder
+8	ensembl	gene	131860635	131861792	.	+	.	ID=gene:GRMZM2G140083;biotype=protein_coding;description=Putative homeobox DNA-binding domain superfamily protein  [Source:UniProtKB/TrEMBL%3BAcc:K7V5V1];logic_name=genebuilder
+4	ensembl	gene	178031327	178034661	.	-	.	ID=gene:GRMZM2G041269;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0PHC8];logic_name=genebuilder
+9	ensembl	gene	130775418	130778550	.	+	.	ID=gene:GRMZM2G043724;biotype=protein_coding;description=Putative DEAD-box ATP-dependent RNA helicase family protein%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C4J233];logic_name=genebuilder
+9	ensembl	gene	147341819	147344192	.	-	.	ID=gene:GRMZM5G816791;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0P2W2];logic_name=genebuilder
+6	ensembl	gene	12824329	12825446	.	+	.	ID=gene:GRMZM2G176060;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UU89];logic_name=genebuilder
+2	ensembl	gene	119166785	119168503	.	+	.	ID=gene:GRMZM2G147491;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FFG8];logic_name=genebuilder
+6	ensembl	gene	29671315	29672920	.	+	.	ID=gene:GRMZM5G828466;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UAZ3];logic_name=genebuilder
+4	ensembl	gene	209291169	209295988	.	+	.	ID=gene:GRMZM2G106119;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7U589];logic_name=genebuilder
+5	ensembl	gene	5632236	5633262	.	-	.	ID=gene:GRMZM2G386273;biotype=protein_coding;description=Ocs element-binding factor 1  [Source:UniProtKB/TrEMBL%3BAcc:B6UHD0];logic_name=genebuilder
+8	ensembl	gene	134991206	134995085	.	-	.	ID=gene:GRMZM2G363460;biotype=protein_coding;description=Peroxin Pex14%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0P7K3];logic_name=genebuilder
+1	ensembl	gene	117709410	117712305	.	-	.	ID=gene:GRMZM5G855776;biotype=protein_coding;logic_name=genebuilder
+1	ensembl	gene	275713522	275717742	.	+	.	ID=gene:GRMZM2G131629;biotype=protein_coding;logic_name=genebuilder
+9	ensembl	gene	142243496	142250986	.	+	.	ID=gene:GRMZM2G550865;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VFJ8];logic_name=genebuilder
+4	ensembl	gene	216699598	216700275	.	-	.	ID=gene:AC216854.3_FG003;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7U5R0];logic_name=fgenesh
+2	ensembl	gene	114205918	114207610	.	+	.	ID=gene:GRMZM2G159977;biotype=protein_coding;logic_name=genebuilder
+4	ensembl	gene	163416288	163420000	.	+	.	ID=gene:GRMZM2G377161;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7U3X3];logic_name=genebuilder
+2	ensembl	gene	107109420	107110250	.	+	.	ID=gene:GRMZM2G137883;biotype=protein_coding;logic_name=genebuilder
+8	ensembl	gene	88213629	88214443	.	-	.	ID=gene:GRMZM5G881064;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VUD1];logic_name=genebuilder
+7	ensembl	gene	141038459	141045540	.	+	.	ID=gene:GRMZM2G323912;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0HIU8];logic_name=genebuilder
+7	ensembl	gene	117268909	117276234	.	-	.	ID=gene:GRMZM2G160364;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C4JBJ4];logic_name=genebuilder
+9	ensembl	gene	90819523	90820320	.	-	.	ID=gene:GRMZM2G342738;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7WAE5];logic_name=genebuilder
+10	ensembl	gene	30728188	30728462	.	+	.	ID=gene:GRMZM5G815171;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UDG6];logic_name=genebuilder
+8	ensembl	gene	110513794	110516376	.	-	.	ID=gene:AC203424.3_FG001;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VVT9];logic_name=fgenesh
+1	ensembl	gene	33883353	33886303	.	+	.	ID=gene:GRMZM2G035552;biotype=protein_coding;description=ACR8  [Source:UniProtKB/TrEMBL%3BAcc:B6TPR3];logic_name=genebuilder
+1	ensembl	gene	258863371	258866841	.	+	.	ID=gene:GRMZM2G146143;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4F9R0];logic_name=genebuilder
+4	ensembl	gene	1256813	1261230	.	+	.	ID=gene:GRMZM2G308860;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7TU41];logic_name=genebuilder
+5	ensembl	gene	143993071	143994817	.	-	.	ID=gene:GRMZM2G330698;biotype=protein_coding;logic_name=genebuilder
+4	ensembl	gene	195189096	195190998	.	-	.	ID=gene:GRMZM2G157481;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7U3Y2];logic_name=genebuilder
+9	ensembl	gene	14548030	14553129	.	-	.	ID=gene:GRMZM2G000393;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0HG01];logic_name=genebuilder
+9	ensembl	gene	107092504	107093992	.	-	.	ID=gene:GRMZM2G008359;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VG63];logic_name=genebuilder
+3	ensembl	gene	1885469	1901582	.	-	.	ID=gene:GRMZM2G156035;biotype=protein_coding;description=Casein kinase I isoform delta-like  [Source:UniProtKB/TrEMBL%3BAcc:B6U0R4];logic_name=genebuilder
+9	ensembl	gene	11081240	11083522	.	-	.	ID=gene:GRMZM2G127893;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FLI9];logic_name=genebuilder
+3	ensembl	gene	170408317	170413958	.	-	.	ID=gene:GRMZM2G018589;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0HIF4];logic_name=genebuilder
+5	ensembl	gene	93832392	93833140	.	+	.	ID=gene:GRMZM2G701717;biotype=protein_coding;logic_name=genebuilder
+3	ensembl	gene	138359394	138361680	.	+	.	ID=gene:AC213398.3_FG007;biotype=protein_coding;logic_name=fgenesh
+1	ensembl	gene	187420786	187430945	.	+	.	ID=gene:GRMZM2G142597;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0PFC2];logic_name=genebuilder
+5	ensembl	gene	129781675	129781995	.	+	.	ID=gene:GRMZM2G701807;biotype=protein_coding;logic_name=genebuilder
+4	ensembl	gene	217555204	217562058	.	-	.	ID=gene:GRMZM2G180578;biotype=protein_coding;description=26S proteasome non-ATPase regulatory subunit 3%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0P531];logic_name=genebuilder
+5	ensembl	gene	160868429	160871942	.	-	.	ID=gene:GRMZM2G077989;biotype=protein_coding;description=RS21-C6 protein  [Source:UniProtKB/TrEMBL%3BAcc:B6T319];logic_name=genebuilder
+2	ensembl	gene	237549333	237550364	.	-	.	ID=gene:GRMZM5G848503;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0P796];logic_name=genebuilder
+1	ensembl	gene	64546536	64550629	.	+	.	ID=gene:GRMZM2G063498;biotype=protein_coding;logic_name=genebuilder
+5	ensembl	gene	23508652	23514980	.	-	.	ID=gene:GRMZM5G837364;biotype=protein_coding;description=Methionine aminopeptidase  [Source:UniProtKB/TrEMBL%3BAcc:B4G1F6];logic_name=genebuilder
+5	ensembl	gene	53562123	53564051	.	+	.	ID=gene:GRMZM2G064562;biotype=protein_coding;logic_name=genebuilder
+5	ensembl	gene	156237129	156240525	.	-	.	ID=gene:AC190526.3_FG004;biotype=protein_coding;logic_name=fgenesh
+7	ensembl	gene	156156854	156161371	.	-	.	ID=gene:GRMZM2G465987;biotype=protein_coding;logic_name=genebuilder
+2	ensembl	gene	184907575	184909958	.	+	.	ID=gene:GRMZM2G125482;biotype=protein_coding;description=Flavonoid 3-monooxygenase  [Source:UniProtKB/TrEMBL%3BAcc:B6SSX8];logic_name=genebuilder
+3	ensembl	gene	178149614	178151478	.	+	.	ID=gene:GRMZM2G003682;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0P2W6];logic_name=genebuilder
+8	ensembl	gene	171150425	171151705	.	+	.	ID=gene:GRMZM2G438299;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VP81];logic_name=genebuilder
+2	ensembl	gene	50604427	50605394	.	+	.	ID=gene:GRMZM2G347314;biotype=protein_coding;logic_name=genebuilder
+4	ensembl	gene	236453001	236453544	.	+	.	ID=gene:GRMZM2G142967;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7URT7];logic_name=genebuilder
+1	ensembl	gene	267227977	267228945	.	-	.	ID=gene:GRMZM2G004160;biotype=protein_coding;description=Chemocyanin%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B6TUK9];logic_name=genebuilder
+10	ensembl	gene	144777835	144780346	.	+	.	ID=gene:GRMZM2G076602;biotype=protein_coding;description=Putative AP2/EREBP transcription factor superfamily protein%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0P327];logic_name=genebuilder
+3	ensembl	gene	12031159	12039337	.	+	.	ID=gene:GRMZM2G098335;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FVC4];logic_name=genebuilder
+8	ensembl	gene	93194050	93196004	.	+	.	ID=gene:GRMZM2G579719;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UYX1];logic_name=genebuilder
+9	ensembl	gene	75178375	75189228	.	-	.	ID=gene:GRMZM2G136300;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7VE32];logic_name=genebuilder
+5	ensembl	gene	5246397	5249772	.	+	.	ID=gene:GRMZM2G130678;biotype=protein_coding;description=Actin-depolymerizing factor 6%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FTP0];logic_name=genebuilder
+1	ensembl	gene	280918468	280920450	.	-	.	ID=gene:GRMZM2G376661;biotype=protein_coding;logic_name=genebuilder
+3	ensembl	gene	197959792	197974963	.	-	.	ID=gene:GRMZM2G304274;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:C0HFR6];logic_name=genebuilder
+3	ensembl	gene	39481523	39482504	.	+	.	ID=gene:GRMZM2G561067;biotype=protein_coding;logic_name=genebuilder
+6	ensembl	gene	133471512	133474870	.	+	.	ID=gene:GRMZM2G118597;biotype=protein_coding;description=Catalytic/ hydrolase%3B Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:B4FMK4];logic_name=genebuilder
+8	ensembl	gene	104742995	104743752	.	-	.	ID=gene:GRMZM2G512037;biotype=protein_coding;description=Uncharacterized protein  [Source:UniProtKB/TrEMBL%3BAcc:K7UZP4];logic_name=genebuilder
