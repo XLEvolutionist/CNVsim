@@ -56,6 +56,9 @@ grep -F -v -f sim1.removed.genes.gff sim2.removed.genes.gff > sim.hetero.gff
 grep -F -v -f sim2.removed.genes.gff sim1.removed.genes.gff >> sim.hetero.gff
 ```
 
+We need to combine these two datasets to produce a "fake" diploid. To do this we will use [wgsim](https://github.com/lh3/wgsim) to use these two (combined) to generate a Illumina sequencing run for each of the files and then combine these into a single sample set. We can use a command such as..
 
+```
+wgsim sim1.fa sim1.R1.fq sim1.R2.fq -N 250000000 -1 100 -2 100 -S 4
+```
 
-Following this we need use [wgsim](https://github.com/lh3/wgsim) to use these two (combined) to generate a Illumina sequencing run.
