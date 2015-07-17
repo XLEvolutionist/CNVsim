@@ -1,0 +1,313 @@
+---
+title: "Simulating deletions on a per window basis"
+author: "Simon Renny-Byfield"
+date: "June 17, 2015"
+output: html_document
+---
+
+This markdown script documents the generation and analysis of several thousand simulated deletions in the maize genome. We will analyse our pipe line and check for TPR, FPR over various read-depth window sizes (50bp to 1000bp), in conjunction with various sizes of deletion (50, 5000 bp).
+
+##Choose and simulate the deleted regions of the genome##
+
+Firstly we will choose the location of deletions in the genome with the help of the `bedtools` function `random`. in short:\n
+
+1. `-g` is the genome file, detailing the sixe of each chromosome
+2. `-l` is the length of the deleted regions
+3. `-n` is the number of deletions
+
+```
+ bedtools random -n 10000 -l 100 -g data/chrLenFilev2.txt > data/windows/100bp_deletions.bed
+```
+
+We performed this analysis for `-l` of 100, 250, 500, 1000, 2000, 5000. I then combined all these `.bed` files using cat:
+
+```
+cat *.bed > deletions.bed
+```
+
+We can pick a random half (~30,000)  of the deletions, and generate a fasta file with those regions deleted for each of two haploid genomes using something like the following for each haploid genome:
+
+```
+bedtools maskfasta -fi /Users/simonrenny-byfield/maize_genome/Zea_mays.AGPv3.22.dna.genome.fa -fo sim1_K.fa -mc K -bed <(cat deletions.bed | gsort --random-sort | head -n 30000  | tee sim1.removed.regions.bed)
+```
+and:
+
+```
+bedtools maskfasta -fi /Users/simonrenny-byfield/maize_genome/Zea_mays.AGPv3.22.dna.genome.fa -fo sim2_K.fa -mc K -bed <(cat deletions.bed | gsort --random-sort | head -n 30000  | tee sim2.removed.regions.bed)
+```
+
+The output needs to be cleaned up, the intervals are replaced with `K` and so we can use `sed` to filter these out using:
+
+```
+sed 's/K//g' < sim1_K.fa > sim1.fa
+```
+```
+#!/bin/bash -l
+#!/bin/bash
+#SBATCH -D /group/jrigrp4/CNVsim/data
+#SBATCH -o /group/jrigrp4/CNVsim/logs/sim_out_log-%j.txt
+#SBATCH -e /group/jrigrp4/CNVsim/logs/sim_err_log-%j.txt
+#SBATCH -J sim
+#SBATCH --array=0-1
+#SBATCH --mem-per-cpu=12000
+#SBATCH --cpus-per-task=1
+
+##Simon Renny-Byfield, UC Davis, April 2015
+
+files=(sim*.fa)
+
+echo "Job Starting: "
+date
+
+cmd="wgsim ${files[$SLURM_ARRAY_TASK_ID]} ${files[$SLURM_ARRAY_TASK_ID]}.R1.fq ${files[$SLURM_ARRAY_TASK_ID]}.R2.fq -N 125000000 -1 100 -2 100 -S 4"
+echo $cmd
+eval $cmd
+echo "Job Ending: "
+date
+```
+This produces 29 Gb of sequence data for paired and set, per samples (so ~58 GB per sample). These need to be combined into a two R1 and R2 files representing the "fake" diploid.
+
+```
+cat sim1.fa.R1.fq sim2.fa.R1.fq > sim_diploid.R1.fq
+cat sim1.fa.R2.fq sim2.fa.R2.fq > sim_diploid.R2.fq
+```
+
+Now we need to map these reads to the genome using `BWA-MEM` and a script that looks like this:
+
+```
+#!/bin/bash -l
+#SBATCH -D /group/jrigrp4/CNVsim/data/windows
+#SBATCH -o /group/jrigrp4/CNVsim/logs/bwamemout_log-%j.txt
+#SBATCH -e /group/jrigrp4/CNVsim/logs/bwamemeerr_log-%j.txt
+#SBATCH -J bwamem
+#SBATCH --array=0
+#SBATCH --mem-per-cpu=3000
+#SBATCH --cpus-per-task=12
+
+##Simon Renny-Byfield, UC Davis, April 2015
+ 
+echo "Starting Job:"
+date
+
+
+filesR1=(*diploid.R1.fq)
+filesR2=(*diploid.R2.fq)
+
+echo ${filesR1[$SLURM_ARRAY_TASK_ID]}
+#now sfs for each .region file
+
+# calculate the .saf file
+cmd="/share/apps/bwa-0.7.9a/bwa mem -t 12 /group/jrigrp4/teosinte_parents/genomes/Zea_mays.AGPv3.22.dna.genome.fa ${filesR1[$SLURM_ARRAY_TASK_ID]} ${filesR2[$SLURM_ARRAY_TASK_ID]} | /share/apps/samtools-1.2/samtools view -bh - > ${filesR1[$SLURM_ARR$
+echo $cmd
+eval $cmd
+
+cmd="samtools sort -@ 12  ${filesR1[$SLURM_ARRAY_TASK_ID]}.bam ${filesR1[$SLURM_ARRAY_TASK_ID]}.sorted"
+echo $cmd
+eval $cmd
+
+cmd="samtools index ${filesR1[$SLURM_ARRAY_TASK_ID]}.sorted.bam"
+echo $cmd
+eval $cmd
+
+
+echo "Job Done: "
+date
+```
+
+Then use the associated `.bam` file and find the coverage over various window sizes using a script that looks like this:
+
+```
+#!/bin/bash -l
+#!/bin/bash
+#SBATCH -D /group/jrigrp4/CNVsim/data/windows
+#SBATCH -o /group/jrigrp4/custom_cnv/logs/mcov_out_log-%j.txt
+#SBATCH -e /group/jrigrp4/custom_cnv/logs/mcov_err_log-%j.txt
+#SBATCH -J SimMulticov
+#SBATCH --array=0-4
+#SBATCH --mem-per-cpu=12000
+#SBATCH --cpus-per-task=1
+
+##Simon Renny-Byfield, UC Davis, June 2015
+
+# define the windows of interest
+windows=(50 250 500 1000 2000)
+
+echo "Job Starting: "
+date
+echo "Working on window size ${windows[$SLURM_ARRAY_TASK_ID]}"
+
+cmd="bedtools multicov -bams /group/jrigrp4/CNVsim/data/windows/*sorted.bam -bed <(bedtools makewindows -g ../../../custom_cnv/data/chrLenFilev2.txt -w ${windows[$SLURM_ARRAY_TASK_ID]}) -q 30 > window_${windows[$SLURM_ARRAY_TASK_ID]}bp_coverage.txt"
+echo $cmd
+eval $cmd
+
+echo "Jobe Done: "
+date
+```
+Next step is to now find out which regions of the genome have been deleted, which are heterozygous and which are homozygous. We will take a look at this using the `GenomicRanges` package in `R`. We have the sim1 and sim2 regions that have been deleted stored in:
+
+1.  sim1.removed.regions.bed
+2.  sim2.removed.regions.bed
+
+```{r,warning=FALSE, messages=FALSE}
+library(GenomicRanges)
+library(rtracklayer)
+library(data.table)
+
+# import the bed files
+sim1.ranges<-import.bed(con="/Users/simonrenny-byfield/GitHubRepos/CNVsim/data/windows/sim1.removed.regions.bed", asRangedData=FALSE)
+sim2.ranges<-import.bed(con="/Users/simonrenny-byfield/GitHubRepos/CNVsim/data/windows/sim2.removed.regions.bed", asRangedData=FALSE)
+
+# find the overlaps between sim1 and sim2: the Homozygotes
+homoRanges<-reduce(subsetByOverlaps(sim1.ranges,sim2.ranges,type = "within",ignore.strand=TRUE))
+
+# find the difference between sim1 and sim2
+hets_index<-as.matrix(findOverlaps(sim1.ranges,sim2.ranges,type = "within",ignore.strand=TRUE))
+# and now join and call all the Heterozygous regions
+heteroRanges<-reduce(unlist(c(sim1.ranges[-c(hets_index[,1]),],sim2.ranges[-c(hets_index[,2]),])))
+
+allRanges<-c(heteroRanges,homoRanges)
+# clean up some useless data
+heteroRanges1<-NULL
+heteroRanges2<-NULL
+
+# now remove any overlapping deletions (i.e. all deletions should be 1000  100  250 2000  500 5000 long)
+homoRanges<-homoRanges[width(homoRanges) %in% c(1000,100,250,2000,500,5000),]
+heteroRanges<-heteroRanges[width(heteroRanges) %in% c(1000,100,250,2000,500,5000),]
+
+
+```
+
+The deletions break down like this:
+```{r,warning=FALSE,echo=FALSE}
+table(c(width(homoRanges),width(heteroRanges)))
+```
+
+Now load in the simulated coverage data, normalized by GC content.
+
+```{r,warning=FALSE,messages=FALSE}
+load("/Users/simonrenny-byfield/GitHubRepos/CNVsim/data/windows/gc_normalized_500bp.RData")
+coverage<-chr6Coverage
+colnames(coverage)<-c("chr","start","end","B73","sim","gc")
+samples<-c("sim")
+coverage<-data.table(coverage)
+
+#trim the data
+
+maxDepth<-10
+minDepth<-0.01
+
+coverage<-subset(coverage,subset=coverage$B73 < maxDepth )
+coverage<-subset(coverage, subset= coverage$B73 > minDepth)
+
+# now call the CNVs
+
+# load in a function to calculate the CNV calls
+source("/Users/simonrenny-byfield/GitHubRepos/cnvwin/scripts/callCNV.R")
+# a function to convert a data.frame to a GRanges object
+source("/Users/simonrenny-byfield/GitHubRepos/cnvwin/scripts/data.frame2GRanges.R")
+# a function to calculate TP rate
+source("/Users/simonrenny-byfield/GitHubRepos/CNVsim/scripts/testRates.R")
+
+
+####
+# Prepare some matrices
+####
+
+iStart<-0.75
+iEnd<-1.25
+jStart<-2
+jEnd<-2.5
+by=0.25
+
+iS<-seq(iStart,iEnd,by=by)
+jS<-seq(jStart,jEnd,by=by)
+
+####
+# Make some important data frames
+####
+
+TPrates<-matrix(nrow=length(iS),ncol=length(jS))
+rownames(TPrates)<-iS
+colnames(TPrates)<-jS
+
+
+FPrates<-matrix(nrow=length(iS),ncol=length(jS))
+rownames(FPrates)<-iS
+colnames(FPrates)<-jS
+
+FPratesHomo<-matrix(nrow=length(iS),ncol=length(jS))
+rownames(FPratesHomo)<-iS
+colnames(FPratesHomo)<-jS
+
+TPratesHomo<-matrix(nrow=length(iS),ncol=length(jS))
+rownames(TPratesHomo)<-iS
+colnames(TPratesHomo)<-jS
+
+FPratesAll<-matrix(nrow=length(iS),ncol=length(jS))
+rownames(FPratesAll)<-iS
+colnames(FPratesAll)<-jS
+
+TPratesAll<-matrix(nrow=length(iS),ncol=length(jS))
+rownames(TPratesAll)<-iS
+colnames(TPratesAll)<-jS
+
+FDRratesAll<-matrix(nrow=length(iS),ncol=length(jS))
+rownames(FDRratesAll)<-iS
+colnames(FDRratesAll)<-jS
+
+PPVratesAll<-matrix(nrow=length(iS),ncol=length(jS))
+rownames(PPVratesAll)<-iS
+colnames(PPVratesAll)<-jS
+
+####
+# Now loop through all the cutt-off values and perform the test
+####
+
+# the size of the deletions in question
+size<-c(2000,5000)
+
+for ( i in 1:length(iS)) {
+   for ( j in 1:length(jS)) { 
+    cnv<-callCNV(gcNorm=coverage,samples,limit=iS[i],limitHom=jS[j])
+    
+    #####################################################################
+    # Now access the heterozygous calls and compare to the simulated data
+    #####################################################################
+    #print(paste(iS[i]," and", jS[j]))
+    tp<-testRates(calls=cnv$cnvs,trues=heteroRanges,intervals=coverage, geno=1, sample="sim_CNV",sizes=size)
+    #print(paste0("Hetero TP: ",tp$truePos))
+    #print(paste0("Hetero FP: ",tp$falsePos))
+    TPrates[i,j]<-tp$truePos
+    FPrates[i,j]<-tp$falsePos
+    
+    tp<-testRates(calls=cnv$cnvs,trues=homoRanges,intervals=coverage, geno=0, sample="sim_CNV",sizes=size)
+    #print(paste0("Homo TP: ",tp$truePos))
+    #print(paste0("Homo FP: ",tp$falsePos))
+    TPratesHomo[i,j]<-tp$truePos
+    FPratesHomo[i,j]<-tp$falsePos
+    
+    tp<-testRates(calls=cnv$cnvs,trues=allRanges,intervals=coverage, geno=c(0,1), sample="sim_CNV",sizes=size)
+    #print(paste0("combined TP: ",tp$truePos))
+    #print(paste0("combined FP: ",tp$falsePos))
+    TPratesAll[i,j]<-tp$truePos
+    FPratesAll[i,j]<-tp$falsePos
+    
+    FDRratesAll[i,j]<-tp$FDR
+    PPVratesAll[i,j]<-tp$PPV
+    
+ }# for
+}# for
+```
+
+Now we print out the True Positive Rate (TPrates for hets and TPratesHomo for Homozygotes) and the False positive rates (FPrates for hets and FPratesHomo for homozygotes) and the TP and TR rates for CNVs regardless of genotype and finally the False Dicovery Rate (FDR) and the precision (PPV). In the tables below the column names are the Standard Deviation cutt-offs for CNVs in homozygous state, that is any window furhter than x SD away from the mean will be called as homozygote. The rownames indicate the cutt-off values for calling an individual as heterozygous for a given CNV. If the ratio of coverage is greater than y SDs from the mean then the individual is called heterozygous, as long as they are no further than x SDs from the mean, in which case they are called as homozygotes (see above). 
+
+```{r,warning=FALSE,messages=FALSE}
+print(TPrates)
+print(FPrates)
+print(TPratesHomo)
+print(FPratesHomo)
+print(TPratesAll)
+print(FPratesAll)
+print(FDRratesAll)
+print(PPVratesAll)
+```

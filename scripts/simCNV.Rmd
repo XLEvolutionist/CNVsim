@@ -59,6 +59,600 @@ grep -F -v -f sim2.removed.genes.gff sim1.removed.genes.gff >> sim.hetero.gff
 We need to combine these two datasets to produce a "fake" diploid. To do this we will use [wgsim](https://github.com/lh3/wgsim) to use these two (combined) to generate a Illumina sequencing run for each of the files and then combine these into a single sample set. We can use a command such as..
 
 ```
-wgsim sim1.fa sim1.R1.fq sim1.R2.fq -N 250000000 -1 100 -2 100 -S 4
+#!/bin/bash -l
+#!/bin/bash
+#SBATCH -D /group/jrigrp4/CNVsim/data
+#SBATCH -o /group/jrigrp4/CNVsim/logs/sim_out_log-%j.txt
+#SBATCH -e /group/jrigrp4/CNVsim/logs/sim_err_log-%j.txt
+#SBATCH -J sim
+#SBATCH --array=0-1
+#SBATCH --mem-per-cpu=12000
+#SBATCH --cpus-per-task=1
+
+##Simon Renny-Byfield, UC Davis, April 2015
+
+files=(sim*.fa)
+
+echo "Job Starting: "
+date
+
+cmd="wgsim ${files[$SLURM_ARRAY_TASK_ID]} ${files[$SLURM_ARRAY_TASK_ID]}.R1.fq ${files[$SLURM_ARRAY_TASK_ID]}.R2.fq -N 125000000 -1 100 -2 100 -S 4"
+echo $cmd
+eval $cmd
+echo "Job Ending: "
+date
+```
+This produces 29 Gb of sequence data for paired and set, per samples (so ~58 GB per sample). These need to be combined into a two R1 and R2 files representing the "fake" diploid.
+
+```
+cat sim1.fa.R1.fq sim2.fa.R1.fq > sim_diploid.R1.fq
+cat sim1.fa.R2.fq sim2.fa.R2.fq > sim_diploid.R2.fq
 ```
 
+##Mapping the simulated data to refv3.22##
+
+We can subsequently map these to the genome using `BWA MEM` and a slightly modified script that is already written for Ginnie's work. The script looks like this:
+
+```
+#!/bin/bash -l
+#SBATCH -D /group/jrigrp4/CNVsim/data/exons
+#SBATCH -o /group/jrigrp4/CNVsim/logs/bwamemout_log-%j.txt
+#SBATCH -e /group/jrigrp4/CNVsim/logs/bwamemeerr_log-%j.txt
+#SBATCH -J bwamem
+#SBATCH --array=0
+#SBATCH --mem-per-cpu=3000
+#SBATCH --cpus-per-task=12
+
+##Simon Renny-Byfield, UC Davis, April 2015
+
+echo "Starting Job:"
+date
+
+
+filesR1=(*diploid.R1.fq)
+filesR2=(*diploid.R2.fq)
+
+echo ${filesR1[$SLURM_ARRAY_TASK_ID]}
+
+cmd="/share/apps/bwa-0.7.9a/bwa mem -t 12 /group/jrigrp4/teosinte_parents/genomes/Zea_mays.AGPv3.22.dna.genome.fa ${filesR1[$SLURM_ARRAY_TASK_ID]} ${filesR2[$SLURM_ARRAY_TASK_ID]} | /share/apps/samtools-1.2/samtools view -bh - > ${filesR1[$SLURM_ARRAY_TASK_ID]}.bam" 
+echo $cmd
+eval $cmd
+
+echo "Job Done: "
+date
+```
+
+##Estimating coverage over genic regions##
+
+So, now we have a `.bam` file of the "fake" diploid and this can be used to estimate coverage over genic regions using `multicov` function of `bedtools`. We will use a quality cut of of `-q 30` for this particular analysis. There is a script to use, with slight modification it looks like this:
+
+```
+#!/bin/bash -l
+#!/bin/bash
+#SBATCH -D /group/jrigrp4/CNVsim/data
+#SBATCH -o /group/jrigrp4/CNVsim/logs/mcov_out_log-%j.txt
+#SBATCH -e /group/jrigrp4/CNVsim/logs/mcov_err_log-%j.txt
+#SBATCH -J multicov
+#SBATCH --mem-per-cpu=12000
+
+##Simon Renny-Byfield, UC Davis, March 2015
+
+cmd="bedtools multicov -bams sim_diploid.R1.fq.bam -bed Zea_mays.AGPv3.22_fullModel_trimmed_sorted.bed -q 30 > sim.coverage.per.gene.txt"
+echo $cmd
+eval $cmd
+```
+
+The data are ready and the next step is to load in the simulated data, link the gc content info, normalize and correct for GC content. Once this is done we can append the simulated info the the overall data and run through the CNV calling pipeline.
+
+Firstly, load in the sample data (Palmar Chico pop).
+
+
+```{r,warning=FALSE,message=FALSE}
+library(EDASeq)
+library(data.table)
+library(ggplot2)
+library(GenomicRanges)
+library(scales)
+library(reshape2)
+#load in some data
+load("/Users/simonrenny-byfield/GitHubRepos/custom_cnv/data/gcNormalized_coverage.RData")
+# make a matrix of 0, representing the "no evidence of change in copy-number"
+simData<-subset(gcNorm, select=c("name","type", "sim","B73.bam"))
+#first load in the heterozygotes, from the simulation
+hets<-fread("/Users/simonrenny-byfield/GitHubRepos/CNVsim/data/sim.hetero.txt", header = FALSE)
+#   remove het genes that are excluded from the genotype calls
+hets<-hets[hets$V1 %in% gcNorm$name]
+#load in the homozygous absent
+homoAbs<-fread("/Users/simonrenny-byfield/GitHubRepos/CNVsim/data/sim.homo.absent.txt", header=FALSE)
+# again remove homo genes that are excluded from the genotype calls
+homoAbs<-homoAbs[homoAbs$V1 %in% gcNorm$name]
+
+# now the genes that are not hetero or homozygous deletion in our simulation
+homoPres<-unique(subset(simData,subset=!name %in% hets$V1 & !name %in% homoAbs$V1 )$name)
+
+#set up some matrices to handle the rate data
+by=0.1
+iStart<-1
+iEnd<-2.4
+jStart<-2.5
+jEnd<-6.6
+ratesHetTP<-matrix(nrow=length(seq(iStart,iEnd,by=by)),ncol=length(seq(jStart,jEnd,by=by)), 
+              dimnames=list(seq(iStart,iEnd,by=by),seq(jStart,jEnd,by=by)))
+ratesHetFP<-ratesHetTP
+ratesHomoTP<-ratesHetTP
+ratesHomoFP<-ratesHetTP
+presenceTP<-ratesHetTP
+presenceFP<-ratesHetTP
+precisionHet<-ratesHetTP
+precisionHom<-ratesHetTP
+precisionNorm<-ratesHetTP
+```
+
+```{r,warning=FALSE,message=FALSE}
+
+seqI<-seq(iStart,iEnd,by=by)
+seqJ<-seq(jStart,jEnd,by=by)
+for ( i in 1:length(seq(iStart,iEnd,by=by))) {
+  for ( j in 1:length(seq(jStart,jEnd,by=by))) { 
+  cnv.mat<-matrix(data=2,nrow=dim(simData)[1],ncol=1)
+  rownames(cnv.mat)<-simData$name
+  colnames(cnv.mat)<-"sim_CNV"
+  #cnv.mat<-data.table<-(cnv.mat)
+  simData<-subset(simData,select=c("name","sim","type", "B73.bam"))
+  lims<-NULL
+  stddevs<-NULL
+  colnames(cnv.mat)<-NULL
+  s<-"sim"
+    sub.df<-subset(simData,select=c(s,"name"))
+    sub.df<-data.frame(sub.df)
+    # print(head(sub.df))
+    hist(sub.df$sim, main =paste0(s, " read-depth"),
+       xlab="normalized coverage per kb",cex.lab=1.4, breaks = c(seq(0,20,0.2),20.00001,max(sub.df$sim)), 
+       xlim=c(0,21), col = alpha("cornflowerblue",0.5),border=alpha("cornflowerblue",0.7))
+    # calculate the ratio between sample and reference"
+    ratio<-subset(sub.df,select="sim")$sim / subset(simData,select="B73.bam")$B73.bam
+    ratio<-data.matrix(ratio)
+    ratio<-log(ratio+0.001)
+    #ratio<-log(ratio1)
+    stdev<-sd(ratio)
+    stddevs<-c(stddevs,stdev)
+    d<-(mean(ratio)-ratio)
+    limit<-seqI[i]
+    print(limit)
+    limitHom<-seqJ[j]
+    print(limitHom)
+    linePos<-mean(ratio)+(limit*stdev)
+    linePosHom<-mean(ratio)+(limitHom*stdev)
+    lims<-c(lims,min(mean(ratio)+linePos),abs(mean(ratio)-linePos))
+    #abline(v=mean(ratio), col = "black", lwd=2, lty = "solid",lend=1)
+    #turn sub.df back into a data.table
+    sub.df<-data.table(sub.df,ratio)
+    ratio.df<-data.table(sub.df,ratio)
+    sName<-paste0(s,"_CNV")
+    simData[,sName:=2,with=FALSE]
+    # call down CNV
+    calls<-(simData[,sName,with=FALSE])
+    calls<-as.vector(as.matrix(calls))
+    calls[ratio<(mean(ratio)-linePos)]<-1
+    calls[ratio<(mean(ratio)-linePosHom)]<-0
+    # call up CNV
+    calls[ratio>(mean(ratio)+linePos)]<-3
+    #attribute 
+    simData[,sName:=calls,with=FALSE]
+
+#####################################################################
+# Now access the heterozygous calls and compare to the simulated data
+#####################################################################
+    
+    #subset to just "gene" intervals
+    simData<-subset(simData,subset= type == "gene")
+  
+    calledHets<-unique(subset(simData,subset=sim_CNV == 1)$name)
+    calledHomo<-unique(subset(simData,subset=sim_CNV == 0)$name)
+    calledPres<-unique(subset(simData,subset=sim_CNV == 2)$name)
+  
+    ####
+    # Find out the True positive Matches
+    ####
+    hetTrue<-calledHets %in% hets$V1 
+    homoTrue<-calledHomo %in% homoAbs$V1
+    present<-calledPres %in% homoPres
+
+####
+# Find the false positives
+####
+
+    hetFalse<-!calledHets %in% hets$V1 
+    homoFalse<-!calledHomo %in% homoAbs$V1
+    presentFalse<-!calledPres %in% homoPres
+
+    ####
+    # Calculate as a rate (i.e. 0 to 1)
+    ####
+
+    # now for the TP rate in het calls
+    hetTPrate<-length(hetTrue[hetTrue==TRUE])/length(hets$V1)
+    # now for the FP rate in het calls
+    hetFPrate<-length(hetFalse[hetFalse==TRUE]) / 
+            ((length(hetFalse[hetFalse==TRUE]))+(length(homoPres)+length(homoAbs$V1)))
+
+    # the same as above but for homozygote CNV calls
+    homoTPrate<-length(homoTrue[homoTrue==TRUE])/length(homoAbs$V1)
+    homoFPrate<-length(homoFalse[homoFalse==TRUE]) / (length(homoFalse[homoFalse==TRUE])+length(hets$V1)+ length(homoPres))
+
+    # now the same for regular calls
+    normalTPrate<-length(present[present==TRUE])/length(homoPres) #called as CNV but is normal
+    normalFPrate<-length(presentFalse[presentFalse==TRUE])/ 
+        (length(presentFalse[presentFalse==TRUE])+length(hets$V1)+length(homoAbs$V1))
+
+  hetPrecision<-hetTPrate/(hetTPrate+hetFPrate)
+  homPrecision<-homoTPrate/(homoTPrate+homoFPrate)
+  normPrecision<-normalTPrate/(normalTPrate+normalFPrate)
+  
+  ratesHetTP[i,j]<-hetTPrate
+  ratesHetFP[i,j]<-hetFPrate
+  ratesHomoTP[i,j]<-homoTPrate
+  ratesHomoFP[i,j]<-homoFPrate
+  presenceTP[i,j]<-normalTPrate
+  presenceFP[i,j]<-normalFPrate
+
+  precisionHet[i,j]<-hetPrecision
+  precisionHom[i,j]<-homPrecision
+  precisionNorm[i,j]<-normPrecision
+ }
+}
+```
+
+```{r,warning=FALSE,message=FALSE}
+####
+# Set up a data.frame to plot all this complex data
+####
+
+rateTable<-rbind(cbind(melt(ratesHetTP), "type"=rep("Hetero TP rate"),"group"=rep("TP")),
+cbind(melt(ratesHetFP), "type"=rep("Hetero"),"group"=rep("FP")),
+cbind(melt(ratesHomoTP), "type"=rep("Homo"),"group"=rep("TP")),
+cbind(melt(ratesHomoFP), "type"=rep("Homo"),"group"=rep("FP")),
+cbind(melt(presenceTP), "type"=rep("Presence"),"group"=rep("TP")),
+cbind(melt(presenceFP), "type"=rep("Presence"),"group"=rep("FP")) )
+
+ggplot(rateTable,aes(x=jitter(rateTable$value[rateTable$group=="FP"]),y=rateTable$value[rateTable$group=="TP"]), factor(rateTable$type))+
+  theme_bw()+
+  geom_smooth(aes(colour=rateTable$type[rateTable$group=="FP"]),size=2)+
+  #scale_fill_discrete("")+
+  theme(axis.title=element_text(size=18,face="bold"),axis.text=element_text(size=18))+
+  theme(legend.title=element_blank(), legend.position=c(0.8,0.15), legend.text=element_text(size=20))+
+  xlab("false positive rate")+
+  ylab("true positive rate")+
+  xlim(0,0.5)+
+  annotate("text",x=ratesHetFP["1","6.1"],y= ratesHetTP["1","6.1"], label=round(ratesHetTP["1","6.1"],3), size =6 )
+
+#simCalls<-gcNorm[,c("name","sim_CNV"), with=FALSE]
+```
+
+##Simulating Exon deletions##
+
+Firstly, choose 1000 random exons as candidates for deletion:
+
+```
+grep -v "scaffold\|Pt\|Mt" < /Users/simonrenny-byfield/maize_genome/Zea_mays.AGPv3.22.gff | grep 'exon' | gsort --random-sort | head -n 1000 >exons.1000.genes.gff
+```
+
+Next step is to generate two genomes, each with a random 500 of these genes deleted.
+
+for the first sample:
+```
+bedtools maskfasta -fi /Users/simonrenny-byfield/maize_genome/Zea_mays.AGPv3.22.dna.genome.fa -fo exon.sim1_K.fa -mc K -bed <(cat exons.1000.genes.gff | gsort --random-sort | head -n 500 | tee exon.sim1.removed.genes.gff) 
+```
+
+and:
+
+```
+bedtools maskfasta -fi /Users/simonrenny-byfield/maize_genome/Zea_mays.AGPv3.22.dna.genome.fa -fo exon.sim2_K.fa -mc K -bed <(cat exons.1000.genes.gff | gsort --random-sort | head -n 500 | tee exon.sim2.removed.genes.gff) 
+```
+
+for the second sample. 
+
+The output needs to be cleaned up, the intervals are replaced with `K` and so we can use `sed` to filter these out using:
+
+```
+sed 's/K//g' < sim1_K.fa > sim1.fa
+```
+Next, we can see what genes are homozygous, and what are heterozygous for deletions amoung these two simulations. This can be done using `grep`. For example find the homozygous present using:
+
+```
+grep -F -v -f sim1.removed.genes.gff 1000.genes.gff | grep -F -v -f sim2.removed.genes.gff > sim.homo.present.gff
+```
+
+Now what about homozygous deletion:
+
+```
+grep -F -x -f sim1.removed.genes.gff sim2.removed.genes.gff > sim.homo.absent.gff
+```
+
+Now, of course, the heterozygotes:
+
+```
+grep -F -v -f sim1.removed.genes.gff sim2.removed.genes.gff > sim.hetero.gff
+grep -F -v -f sim2.removed.genes.gff sim1.removed.genes.gff >> sim.hetero.gff
+```
+We simulate the Illumina data with a script that looks like this..
+
+```
+#!/bin/bash -l
+#!/bin/bash
+#SBATCH -D /group/jrigrp4/CNVsim/data/exons
+#SBATCH -o /group/jrigrp4/CNVsim/logs/sim_out_log-%j.txt
+#SBATCH -e /group/jrigrp4/CNVsim/logs/sim_err_log-%j.txt
+#SBATCH -J sim
+#SBATCH --array=0-1
+#SBATCH --mem-per-cpu=3000
+#SBATCH --cpus-per-task=1
+
+##Simon Renny-Byfield, UC Davis, April 2015
+
+files=(*.fa)
+
+echo "Job Starting: "
+date
+
+cmd="wgsim ${files[$SLURM_ARRAY_TASK_ID]} ${files[$SLURM_ARRAY_TASK_ID]}.R1.fq ${files[$SLURM_ARRAY_TASK_ID]}.R2.fq -N 125000000 -1 100 -2 100 -S 4"
+echo $cmd
+eval $cmd
+echo "Job Ending: "
+date
+```
+
+Next we need to map the reads to the reference using:
+
+```
+#!/bin/bash -l
+#!/bin/bash
+#SBATCH -D /group/jrigrp4/CNVsim/data/exons/
+#SBATCH -o /group/jrigrp4/CNVsim/logs/mcov_out_log-%j.txt
+#SBATCH -e /group/jrigrp4/CNVsim/logs/mcov_err_log-%j.txt
+#SBATCH -J multicov
+#SBATCH --mem-per-cpu=12000
+
+##Simon Renny-Byfield, UC Davis, March 2015
+
+cmd="bedtools multicov -bams sorted.exon.sim_diploid.R1.fq.bam -bed ../../../custom_cnv/data/Zea_mays.AGPv3.22_fullModel_trimmed_sorted.bed -q 30 > sim.coverage.per.gene_no_repeats.txt"
+echo $cmd
+eval $cmd
+```
+
+Now do the same as above but for the exon simulations..
+```{r,warning=FALSE,message=FALSE}
+#load in some data
+setwd("/Users/simonrenny-byfield/GitHubRepos/CNVsim/data/exons")
+#load("gc_Norm.RData")
+
+temp.space <- new.env()
+bar <- load("gc_Norm.RData", temp.space)
+exonData<- get(bar, temp.space)
+
+# make a matrix of 0, representing the "no evidence of change in copy-number"
+simData<-subset(exonData, select=c("sim","B73.bam"))
+norm.df<-fread("/Users/simonrenny-byfield/GitHubRepos/custom_cnv/data/normDepth.txt",header=TRUE)
+simData<-cbind(subset(norm.df,select=c(1:5)),simData)
+simData<-subset(simData,subset=simData$B73.bam > 1)
+simData<-subset(simData,subset=simData$B73.bam < 15)
+
+simData<-subset(simData,subset=apply(subset(simData, select=c(6,7)),1,function(x) max(x)) < 100)
+
+
+#first load in the heterozygotes, from the simulation
+hets<-fread("exon.sim.hetero.txt", header = FALSE)
+#   remove het genes that are excluded from the genotype calls
+hets<-hets[hets$V1 %in% gcNorm$name]
+#load in the homozygous absent
+homoAbs<-fread("exon.sim.homo.absent.txt", header=FALSE)
+# again remove homo genes that are excluded from the genotype calls
+homoAbs<-homoAbs[homoAbs$V1 %in% gcNorm$name]
+
+# now the genes that are not hetero or homozygous deletion in our simulation
+homoPres<-unique(subset(simData,subset=!name %in% hets$V1 & !name %in% homoAbs$V1 )$name)
+
+#set up some matrices to handle the rate data
+by=0.1
+iStart<-1
+iEnd<-2.4
+jStart<-2.5
+jEnd<-6.6
+ratesHetTP<-matrix(nrow=length(seq(iStart,iEnd,by=by)),ncol=length(seq(jStart,jEnd,by=by)), 
+              dimnames=list(seq(iStart,iEnd,by=by),seq(jStart,jEnd,by=by)))
+ratesHetFP<-ratesHetTP
+ratesHomoTP<-ratesHetTP
+ratesHomoFP<-ratesHetTP
+presenceTP<-ratesHetTP
+presenceFP<-ratesHetTP
+precisionHet<-ratesHetTP
+precisionHom<-ratesHetTP
+precisionNorm<-ratesHetTP
+```
+
+```{r,warning=FALSE,message=FALSE}
+
+seqI<-seq(iStart,iEnd,by=by)
+seqJ<-seq(jStart,jEnd,by=by)
+for ( i in 1:length(seq(iStart,iEnd,by=by))) {
+  for ( j in 1:length(seq(jStart,jEnd,by=by))) { 
+  cnv.mat<-matrix(data=2,nrow=dim(simData)[1],ncol=1)
+  rownames(cnv.mat)<-simData$name
+  colnames(cnv.mat)<-"sim_CNV"
+  cnv.mat<-data.table<-(cnv.mat)
+  simData<-subset(simData,select=c("name","sim","type", "B73.bam"))
+  lims<-NULL
+  stddevs<-NULL
+  colnames(cnv.mat)<-NULL
+  s<-"sim"
+    sub.df<-subset(simData,select=c(s,"name"))
+    sub.df<-data.frame(sub.df)
+    # print(head(sub.df))
+    hist(sub.df$sim, main =paste0(s, " read-depth"),
+       xlab="normalized coverage per kb",cex.lab=1.4, breaks = c(seq(0,20,0.2),20.00001,max(sub.df$sim)), 
+       xlim=c(0,21), col = alpha("cornflowerblue",0.5),border=alpha("cornflowerblue",0.7))
+    # calculate the ratio between sample and reference"
+    ratio<-subset(sub.df,select="sim")$sim / subset(simData,select="B73.bam")$B73.bam
+    ratio<-data.matrix(ratio)
+    ratio<-log(ratio+0.001)
+    #ratio<-log(ratio1)
+    stdev<-sd(ratio)
+    stddevs<-c(stddevs,stdev)
+    d<-(mean(ratio)-ratio)
+    limit<-seqI[i]
+    print(limit)
+    limitHom<-seqJ[j]
+    print(limitHom)
+    linePos<-mean(ratio)+(limit*stdev)
+    linePosHom<-mean(ratio)+(limitHom*stdev)
+    lims<-c(lims,min(mean(ratio)+linePos),abs(mean(ratio)-linePos))
+    #abline(v=mean(ratio), col = "black", lwd=2, lty = "solid",lend=1)
+    #turn sub.df back into a data.table
+    sub.df<-data.table(sub.df,ratio)
+    ratio.df<-data.table(sub.df,ratio)
+    sName<-paste0(s,"_CNV")
+    simData[,sName:=2,with=FALSE]
+    # call down CNV
+    calls<-(simData[,sName,with=FALSE])
+    calls<-as.vector(as.matrix(calls))
+    calls[ratio<(mean(ratio)-linePos)]<-1
+    calls[ratio<(mean(ratio)-linePosHom)]<-0
+    # call up CNV
+    calls[ratio>(mean(ratio)+linePos)]<-3
+    #attribute 
+    simData[,sName:=calls,with=FALSE]
+
+
+#####################################################################
+# Now access the heterozygous calls and compare to the simulated data
+#####################################################################
+    
+    #subset to just "exon" intervals
+    simData<-subset(simData,subset= type == "exon")
+  
+    calledHets<-unique(subset(simData,subset=sim_CNV == 1)$name)
+    calledHomo<-unique(subset(simData,subset=sim_CNV == 0)$name)
+    calledPres<-unique(subset(simData,subset=sim_CNV == 2)$name)
+  
+    ####
+    # Find out the True positive Matches
+    ####
+    hetTrue<-calledHets %in% hets$V1 
+    homoTrue<-calledHomo %in% homoAbs$V1
+    present<-calledPres %in% homoPres
+
+####
+# Find the false positives
+####
+
+    hetFalse<-!calledHets %in% hets$V1 
+    homoFalse<-!calledHomo %in% homoAbs$V1
+    presentFalse<-!calledPres %in% homoPres
+
+    ####
+    # Calculate as a rate (i.e. 0 to 1)
+    ####
+
+    # now for the TP rate in het calls
+    hetTPrate<-length(hetTrue[hetTrue==TRUE])/length(hets$V1)
+    # now for the FP rate in het calls
+    hetFPrate<-length(hetFalse[hetFalse==TRUE]) / 
+            ((length(hetFalse[hetFalse==TRUE]))+(length(homoPres)+length(homoAbs$V1)))
+
+    # the same as above but for homozygote CNV calls
+    homoTPrate<-length(homoTrue[homoTrue==TRUE])/length(homoAbs$V1)
+    homoFPrate<-length(homoFalse[homoFalse==TRUE]) / (length(homoFalse[homoFalse==TRUE])+length(hets$V1)+ length(homoPres))
+
+    # now the same for regular calls
+    normalTPrate<-length(present[present==TRUE])/length(homoPres) #called as CNV but is normal
+    normalFPrate<-length(presentFalse[presentFalse==TRUE])/ 
+        (length(presentFalse[presentFalse==TRUE])+length(hets$V1)+length(homoAbs$V1))
+
+  hetPrecision<-hetTPrate/(hetTPrate+hetFPrate)
+  homPrecision<-homoTPrate/(homoTPrate+homoFPrate)
+  normPrecision<-normalTPrate/(normalTPrate+normalFPrate)
+  
+  ratesHetTP[i,j]<-hetTPrate
+  ratesHetFP[i,j]<-hetFPrate
+  ratesHomoTP[i,j]<-homoTPrate
+  ratesHomoFP[i,j]<-homoFPrate
+  presenceTP[i,j]<-normalTPrate
+  presenceFP[i,j]<-normalFPrate
+
+  precisionHet[i,j]<-hetPrecision
+  precisionHom[i,j]<-homPrecision
+  precisionNorm[i,j]<-normPrecision
+ }
+}
+```
+
+```{r,warning=FALSE,message=FALSE}
+####
+# Set up a data.frame to plot all this complex data
+####
+
+rateTable<-rbind(cbind(melt(ratesHetTP), "type"=rep("Hetero TP rate"),"group"=rep("TP")),
+cbind(melt(ratesHetFP), "type"=rep("Hetero"),"group"=rep("FP")),
+cbind(melt(ratesHomoTP), "type"=rep("Homo"),"group"=rep("TP")),
+cbind(melt(ratesHomoFP), "type"=rep("Homo"),"group"=rep("FP")),
+cbind(melt(presenceTP), "type"=rep("Presence"),"group"=rep("TP")),
+cbind(melt(presenceFP), "type"=rep("Presence"),"group"=rep("FP")) )
+
+ggplot(rateTable,aes(x=rateTable$value[rateTable$group=="FP"],y=rateTable$value[rateTable$group=="TP"]), factor(rateTable$type))+
+  theme_bw()+
+  geom_smooth(aes(colour=rateTable$type[rateTable$group=="FP"]),size=2)+
+  #scale_fill_discrete("")+
+  theme(axis.title=element_text(size=18,face="bold"),axis.text=element_text(size=18))+
+  theme(legend.title=element_blank(), legend.position=c(0.8,0.15), legend.text=element_text(size=20))+
+  xlab("false positive rate")+
+  ylab("true positive rate")+
+  xlim(0,0.5)+
+  annotate("text",x=ratesHetFP["1","6.1"],y= ratesHetTP["1","6.1"], label=round(ratesHetTP["1","6.1"],3), size =6 )
+
+#simCalls<-gcNorm[,c("name","sim_CNV"), with=FALSE]
+
+```
+
+How ddoes the size of genes interact with the rate a which they are called as CNV?
+
+```{r,warning=FALSE}
+
+test.list<-lapply(levels(as.factor(intBins.df$type)), function(x) {
+  a<-intBins.df[intBins.df$type==x,]
+  return(cut2(as.numeric(a$width),g=10))
+})
+levelTypes<-levels(as.factor(intBins.df$type))
+intBins.df[,cut:="NA"]
+intBins.df[,CNVscore:="NA"]
+
+
+# now calculate the proportion of intervals that are CNV at each bin of width, by type of course
+
+tab<-NULL
+for ( i in 1:length(levelTypes)) {
+  print(levelTypes[i])
+  intBins.df[intBins.df$type ==levelTypes[i],]$cut<-test.list[i]
+  cnv<-intBins.df[intBins.df$type ==levelTypes[i],][apply(subset(intBins.df[intBins.df$type ==levelTypes[i],],select=c(30:48)),1,function(x) !all(x == 2) & !any(x==3) ),]
+  Noncnv<-intBins.df[intBins.df$type ==levelTypes[i],]
+  cnvTable<-table(factor(cnv$cut))
+  totalTable<-table(factor(Noncnv$cut))
+  bins<-unique(names(c(table(factor(cnv$cut)),table(factor(Noncnv$cut)))))
+  bins<-bins[order(bins)]
+  for ( j in bins ) {
+    if ( is.na(totalTable[j]) ) {
+      totalTable[j]<-0
+    }#
+    if ( is.na(cnvTable[j]) ) {
+      cnvTable[j]<-0
+    }#
+    prop<-cnvTable[j]/totalTable[j]
+   tab<-rbind(tab,(cbind("prop"=prop,"bin"=j,"type"=levelTypes[i])))
+  }#for
+}#for
+tab<-as.data.frame(tab)
+tab<-tab[order(tab$bin),]
+ggplot(data=tab, aes(y=as.numeric(prop), x=as.factor(bin), colour=type))+
+  facet_wrap(~type)+
+  geom_point(size = 4)
+
+```
